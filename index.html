@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>A Bússola — Ferramentas da psicologia para lidar com a ansiedade</title>
+<meta name="description" content="Plataforma de educação sobre ansiedade: aprenda ferramentas da TCC, DBT e ACT para compreender a ansiedade, regular emoções e responder a pensamentos difíceis. Com Lucas Rocha, psicólogo (CRP 04/64296).">
+<meta name="author" content="Lucas Rocha">
+<meta name="theme-color" content="#0b0c0e">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:site_name" content="A Bússola">
+<meta property="og:title" content="A Bússola — Ferramentas da psicologia para lidar com a ansiedade">
+<meta property="og:description" content="Aulas gravadas com ferramentas da TCC, DBT e ACT. 12 meses de acesso, 7 dias para desistir.">
+<meta property="og:image" content="assets/mockup-aula.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/svg+xml" href="assets/bussola-simbolo.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;800&display=swap">
+<style>
+/* ── Tokens (design system Modernist, com acento azul da Bússola) ── */
+:root{
+  --color-bg:#fff;
+  --color-text:#111214;
+  --color-divider:#111214;
+  --color-ink:#0b0c0e;
+  --color-accent:#1f55e0;
+  --color-accent-100:#eef3ff;
+  --color-accent-200:#dbe5ff;
+  --color-accent-300:#bccdff;
+  --color-accent-400:#8aa6f5;
+  --color-accent-500:#3a68e6;
+  --color-accent-600:#1a47c4;
+  --color-accent-700:#163a9e;
+  --color-accent-800:#122d78;
+  --color-accent-900:#0c1d4d;
+  --line-dark:rgba(255,255,255,.85);
+  --muted:#3b3d42;
+  --muted-dark:#c3c7d0;
+  --font-heading:"Archivo", system-ui, sans-serif;
+  --font-body:"Archivo", system-ui, sans-serif;
+}
+
+/* ── Base ── */
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--color-bg);color:var(--color-text);font-family:var(--font-body);font-size:15px;line-height:1.55;-webkit-font-smoothing:antialiased}
+h1,h2,h3{font-family:var(--font-heading);font-weight:800;line-height:1.12;letter-spacing:-.015em}
+p,h1,h2,h3,figure,blockquote{margin:0}
+img{display:block;max-width:100%}
+a{color:var(--color-accent-700);text-underline-offset:3px}
+a:hover{color:var(--color-accent-900)}
+:focus{outline:none}
+:focus-visible{outline:2px solid var(--color-accent);outline-offset:2px}
+::selection{background:color-mix(in srgb,var(--color-accent) 30%,transparent)}
+
+/* ── Botões ── */
+.btn{display:inline-flex;align-items:center;justify-content:space-between;gap:6px;cursor:pointer;text-decoration:none;font-family:var(--font-heading);font-weight:800;line-height:1.2;border:1px solid transparent;border-radius:999px}
+.btn-primary{background:var(--color-accent);color:#fff}
+.btn-primary:hover{background:var(--color-accent-600);color:#fff}
+.btn-primary:active{background:var(--color-accent-700)}
+.btn-lg{padding:18px 28px;font-size:17px;min-width:min(100%,300px)}
+.btn-light{background:#fff;color:var(--color-accent-800);padding:20px 28px;font-size:18px}
+.btn-light:hover{background:var(--color-ink);color:#fff}
+.btn-round{width:52px;height:52px;padding:0;justify-content:center;font-size:20px}
+.btn-outline{background:#fff;color:var(--color-text);border:2px solid var(--color-divider)}
+.btn-outline:hover{background:color-mix(in srgb,var(--color-text) 7%,#fff)}
+
+/* ── Estrutura ── */
+.page{position:relative;min-height:100vh;overflow-x:clip}
+.grid-overlay{position:absolute;inset:0;z-index:5;pointer-events:none;mix-blend-mode:difference;background-image:linear-gradient(90deg,rgba(255,255,255,.07) 1px,transparent 1px),linear-gradient(180deg,rgba(255,255,255,.07) 1px,transparent 1px);background-size:56px 56px;background-position:center top}
+section{position:relative;overflow:hidden}
+.dark{background:var(--color-ink);color:#fff}
+.wrap{max-width:1280px;margin:0 auto;position:relative;padding:88px 24px}
+.above{position:relative;z-index:6}
+.eyebrow{font-size:13px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--color-accent);margin-bottom:24px}
+.dark .eyebrow{color:var(--color-accent-400)}
+.h2{font-size:clamp(30px,3.6vw,52px);font-weight:800;line-height:1.04;letter-spacing:-.03em;text-wrap:balance}
+.lead{margin-top:20px;font-size:18px;line-height:1.6;color:var(--muted);text-wrap:pretty}
+.bignum{position:absolute;right:-1vw;top:-3vw;font-size:clamp(200px,28vw,440px);font-weight:800;line-height:.8;letter-spacing:-.06em;color:rgba(31,85,224,.06);pointer-events:none;user-select:none}
+.dark .bignum{color:rgba(255,255,255,.05)}
+.pill{padding:10px 18px;border-radius:999px;font-size:15px;font-weight:700}
+
+/* ── Cabeçalho ── */
+.site-header{position:sticky;top:0;z-index:20;background:var(--color-ink);color:#fff}
+.site-header nav{max-width:1280px;margin:0 auto;padding:14px 24px;display:flex;align-items:center;gap:28px;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:10px;font-weight:800;font-size:20px;letter-spacing:-.02em;color:#fff;text-decoration:none;margin-right:auto}
+.brand:hover{color:#fff}
+.nav-links{display:flex;gap:24px;flex-wrap:wrap;font-size:14px}
+.nav-links a{color:#fff;text-decoration:none}
+.nav-links a:hover{color:var(--color-accent-400)}
+.nav-cta{padding:10px 18px;font-size:14px;font-weight:700}
+
+/* ── Hero ── */
+.hero .wrap{padding:96px 24px;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,460px),1fr));gap:48px;align-items:center;min-height:min(88vh,860px)}
+.hero-copy{position:relative;z-index:2}
+.hero h1{font-size:clamp(40px,5.6vw,80px);font-weight:800;line-height:.98;letter-spacing:-.035em;text-wrap:balance}
+.hero-sub{margin-top:28px;font-size:19px;line-height:1.55;color:var(--muted-dark);max-width:560px;text-wrap:pretty}
+.hero-actions{margin-top:36px;display:flex;flex-direction:column;gap:14px;align-items:flex-start}
+.hero-note{font-size:14px;color:#9a9fab}
+.hero-art{position:relative;z-index:6;min-height:560px;align-self:stretch;overflow:hidden;margin:0 calc(-24px - max(0px,(100vw - 1280px)/2)) -96px 0;
+  -webkit-mask-image:linear-gradient(90deg,transparent 0,#000 22%),linear-gradient(180deg,transparent 0,#000 14%,#000 100%);-webkit-mask-composite:source-in;
+  mask-image:linear-gradient(90deg,transparent 0,#000 22%),linear-gradient(180deg,transparent 0,#000 14%,#000 100%);mask-composite:intersect}
+.hero-cols{position:absolute;top:-220px;bottom:-220px;left:0;width:980px;transform:rotate(8deg);transform-origin:20% 50%;display:grid;grid-template-columns:repeat(3,300px);gap:20px}
+.hero-col{display:flex;flex-direction:column;gap:20px}
+.hero-col:nth-child(1){padding-top:120px}
+.hero-col:nth-child(3){padding-top:200px}
+.hero-card{position:relative;flex:none;height:425px;border-radius:24px;overflow:hidden}
+.hero-card img,.track-card img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+
+/* ── 01 Contexto ── */
+.ctx-head{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:48px;align-items:start}
+.ctx-head .eyebrow{margin-bottom:0}
+.stats{margin-top:56px;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:16px}
+.stat{padding:28px;border:2px solid var(--color-divider);border-radius:20px;display:flex;flex-direction:column;gap:28px;justify-content:space-between;min-height:240px}
+.stat-n{font-size:clamp(44px,4.4vw,64px);font-weight:800;letter-spacing:-.04em;line-height:1;color:var(--color-accent)}
+.stat p{font-size:18px;line-height:1.45;text-wrap:pretty}
+.stat-src{font-size:13px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#55575c}
+.ctx-body{margin-top:40px;font-size:18px;line-height:1.65;color:var(--muted);max-width:720px;text-wrap:pretty}
+
+/* ── 02 Ferramentas ── */
+.tools .wrap{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:56px;align-items:center}
+.mockup{position:relative;z-index:6;aspect-ratio:994/600;width:100%;border:2px solid var(--line-dark);border-radius:20px;overflow:hidden;background:var(--color-ink);box-shadow:0 30px 80px rgba(31,85,224,.25)}
+.mockup img{width:100%;height:100%;object-fit:cover}
+.tools-text{margin-top:28px;display:flex;flex-direction:column;gap:18px;font-size:18px;line-height:1.65;color:var(--muted-dark);text-wrap:pretty}
+.tool-grid{grid-column:1/-1;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:16px}
+.tool{padding:32px;border:2px solid var(--line-dark);border-radius:20px;display:flex;flex-direction:column;gap:16px;min-height:260px;transition:background .15s}
+.tool:hover{background:var(--color-accent)}
+.tool-abbr{font-size:clamp(48px,5vw,72px);font-weight:800;letter-spacing:-.045em;line-height:.9}
+.tool-name{font-size:15px;font-weight:700;padding-bottom:16px;border-bottom:2px solid var(--line-dark)}
+.tool p{font-size:17px;line-height:1.55;color:#d6d9e0;text-wrap:pretty}
+
+/* ── 03 Trilhas ── */
+.trilhas .wrap{padding:88px 24px 72px}
+.split-head{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap}
+.arrows{display:flex;gap:8px}
+.track{position:relative;z-index:6;overflow-x:auto;scrollbar-width:none;cursor:grab;user-select:none;scroll-snap-type:x mandatory;scroll-padding-left:max(24px,calc((100vw - 1232px)/2));padding:4px 0}
+.track::-webkit-scrollbar{display:none}
+.track.is-dragging{cursor:grabbing;scroll-snap-type:none}
+.track-row{display:flex;gap:16px;width:max-content;padding-left:max(24px,calc((100vw - 1232px)/2))}
+.track-row::after{content:"";flex:none;width:8px}
+.track-card{position:relative;flex:none;width:min(78vw,300px);aspect-ratio:706/1000;border-radius:24px;overflow:hidden;scroll-snap-align:start;transition:transform .2s}
+.track-card:hover{transform:translateY(-6px)}
+.trilhas .cta-row{padding:40px 24px 88px}
+
+/* ── 04 Para quem ── */
+.fit-grid{margin-top:56px;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:16px}
+.fit{padding:36px;border-radius:20px}
+.fit-yes{background:var(--color-accent)}
+.fit-no{border:2px solid var(--line-dark)}
+.fit h3{font-size:22px;font-weight:800;line-height:1.55;letter-spacing:0;margin-bottom:24px}
+.fit ul{list-style:none;margin:0;padding:0;border-top:2px solid var(--fit-line)}
+.fit li{display:flex;gap:16px;padding:16px 0;border-bottom:2px solid var(--fit-line);font-size:17px;line-height:1.5}
+.fit li::before{font-weight:800;color:#fff}
+.fit-yes{--fit-line:rgba(255,255,255,.5)}
+.fit-yes li::before{content:"+"}
+.fit-no{--fit-line:var(--line-dark)}
+.fit-no li{color:var(--muted-dark)}
+.fit-no li::before{content:"–"}
+
+/* ── 05 Conteúdo ── */
+.counts{display:flex;gap:10px;flex-wrap:wrap}
+.counts .pill{border:2px solid var(--color-divider)}
+.counts .pill-accent{background:var(--color-accent);border-color:var(--color-accent);color:#fff}
+.course{margin-top:56px;display:flex;flex-wrap:wrap;gap:20px;align-items:flex-start}
+.mod-tabs{flex:1 1 300px;min-width:0;position:relative;z-index:6;display:flex;flex-direction:column;gap:10px}
+.mod-tab{display:flex;align-items:center;gap:18px;width:100%;padding:18px 22px;border-radius:20px;border:2px solid var(--color-divider);background:#fff;color:var(--color-text);cursor:pointer;text-align:left;font:inherit;transition:background .15s,border-color .15s}
+.mod-tab:hover{border-color:var(--color-accent)}
+.mod-tab[aria-selected="true"]{background:var(--color-accent);border-color:var(--color-accent);color:#fff}
+.mod-n{font-size:clamp(34px,3.4vw,44px);font-weight:800;letter-spacing:-.04em;line-height:1;min-width:56px}
+.mod-label{display:flex;flex-direction:column;gap:4px;min-width:0}
+.mod-title{font-size:18px;font-weight:800;line-height:1.2;text-wrap:balance}
+.mod-count{font-size:14px;font-weight:600;opacity:.75}
+.mod-panel{flex:2 1 480px;min-width:0;position:relative;z-index:6;border:2px solid var(--color-divider);border-radius:24px;overflow:hidden;background:#fff}
+.mod-head{padding:28px 32px;background:var(--color-ink);color:#fff;display:flex;align-items:flex-end;justify-content:space-between;gap:20px;flex-wrap:wrap}
+.mod-head > div{display:flex;flex-direction:column;gap:10px}
+.mod-kicker{font-size:13px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--color-accent-400)}
+.mod-head h3{font-size:clamp(24px,2.6vw,34px);font-weight:800;letter-spacing:-.025em;line-height:1.1}
+.mod-head .pill{padding:8px 14px;border:2px solid var(--line-dark);font-size:14px}
+.lessons{list-style:none;margin:0;padding:0}
+.lessons li{display:grid;grid-template-columns:56px minmax(0,1fr) 36px;gap:16px;align-items:center;padding:18px 32px;border-top:2px solid var(--color-accent-100)}
+.lessons li:hover{background:var(--color-accent-100)}
+.lesson-n{font-size:15px;font-weight:800;color:var(--color-accent)}
+.lesson-t{font-size:17px;font-weight:600;line-height:1.4;text-wrap:pretty}
+.lesson-play{width:36px;height:36px;border-radius:999px;background:var(--color-accent-100);color:var(--color-accent);display:flex;align-items:center;justify-content:center;font-size:12px}
+.feedback{margin-top:88px;padding-top:56px;border-top:2px solid var(--color-divider)}
+.feedback h3{font-size:clamp(26px,2.8vw,40px);font-weight:800;line-height:1.08;letter-spacing:-.03em}
+.feedback .lead{margin-top:14px;font-size:17px;max-width:640px}
+.quotes{margin-top:36px;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:20px;position:relative;z-index:6}
+.quote{padding:32px;border:2px solid var(--color-divider);border-radius:24px;background:#fff;display:flex;flex-direction:column;justify-content:space-between;gap:28px;min-height:240px}
+.quote blockquote{font-size:18px;line-height:1.55;text-wrap:pretty}
+.quote figcaption{font-size:13px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--color-accent-700)}
+
+/* ── 06 Oferta ── */
+.offer .wrap{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,460px),1fr))}
+.offer-list-col{padding-right:48px;padding-bottom:40px}
+.includes{list-style:none;margin:40px 0 0;padding:0;border-top:2px solid var(--line-dark)}
+.includes li{display:grid;grid-template-columns:48px minmax(0,1fr);gap:12px;padding:18px 0;border-bottom:2px solid var(--line-dark);font-size:18px;line-height:1.45}
+.includes li span{font-weight:800;color:var(--color-accent-400)}
+.price{background:var(--color-accent);padding:clamp(28px,4vw,48px);display:flex;flex-direction:column;justify-content:space-between;gap:40px;border:2px solid var(--line-dark);border-radius:20px}
+.price-kicker{font-size:13px;font-weight:700;letter-spacing:.14em;text-transform:uppercase}
+.price-inst{font-size:24px;font-weight:700;margin-top:28px}
+.price-big{font-size:clamp(64px,8vw,112px);font-weight:800;letter-spacing:-.045em;line-height:.95;margin-top:6px}
+.price-cash{margin-top:24px;padding-top:20px;border-top:2px solid rgba(255,255,255,.6);font-size:24px;font-weight:700}
+.price-terms{margin-top:12px;font-size:15px;line-height:1.5;color:#e8eeff}
+.price .btn{width:100%}
+
+/* ── 07 Quem sou eu ── */
+.about .wrap{display:flex;flex-wrap:wrap;gap:56px;align-items:flex-start}
+.about-media{flex:1 1 360px;max-width:500px;position:relative;z-index:6;display:flex;flex-direction:column;gap:20px}
+.portrait{aspect-ratio:412/556;width:100%;border:2px solid var(--color-divider);border-radius:28px;overflow:hidden;background:var(--color-accent-100)}
+.portrait img{width:100%;height:100%;object-fit:cover}
+.chips{display:flex;flex-wrap:wrap;gap:10px}
+.chips .pill{background:var(--color-ink);color:#fff}
+.about-copy{flex:1.3 1 420px;min-width:0;position:relative;z-index:6}
+.about-copy h2{font-size:clamp(34px,4.4vw,64px);font-weight:800;line-height:1.02;letter-spacing:-.035em}
+.about-copy h2 span{color:var(--color-accent)}
+.about-crp{margin-top:12px;font-size:17px;font-weight:600;color:var(--color-accent-700)}
+.about-text{margin-top:28px;padding-top:28px;border-top:2px solid var(--color-divider);display:flex;flex-direction:column;gap:18px;font-size:18px;line-height:1.7;color:var(--muted);text-wrap:pretty}
+
+/* ── Garantia ── */
+.guarantee .wrap{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,360px),1fr));gap:48px;align-items:center}
+.g-mark{display:flex;align-items:flex-end;gap:20px;border-bottom:2px solid var(--line-dark);padding-bottom:16px}
+.g-num{font-size:clamp(140px,18vw,240px);font-weight:800;line-height:.8;letter-spacing:-.06em;color:var(--color-accent-400)}
+.g-label{font-size:22px;font-weight:800;line-height:1.1;padding-bottom:6px}
+.g-text{display:flex;flex-direction:column;gap:18px;font-size:18px;line-height:1.65;color:var(--muted-dark);text-wrap:pretty}
+.g-text p:first-child{color:#fff;font-weight:700;font-size:20px}
+
+/* ── 08 FAQ ── */
+.faq{overflow:visible}
+.faq .wrap{display:flex;flex-wrap:wrap;gap:48px;align-items:flex-start}
+.faq-head{flex:1 1 300px;position:sticky;top:100px}
+.faq-list{flex:2 1 560px;min-width:0;border-top:2px solid var(--color-divider)}
+.faq-item{border-bottom:2px solid var(--color-divider)}
+.faq-q{width:100%;display:grid;grid-template-columns:48px minmax(0,1fr) 32px;align-items:center;gap:12px;padding:22px 0;background:none;border:0;cursor:pointer;text-align:left;font:inherit;color:var(--color-text)}
+.faq-q:hover{color:var(--color-accent)}
+.faq-n{font-size:14px;font-weight:700;color:var(--color-accent)}
+.faq-t{font-size:19px;font-weight:700}
+.faq-sign{font-size:24px;font-weight:600;text-align:right}
+.faq-sign::before{content:"+"}
+.faq-q[aria-expanded="true"] .faq-sign::before{content:"–"}
+.faq-a{padding:0 44px 26px 60px;font-size:17px;line-height:1.65;color:var(--muted);text-wrap:pretty}
+
+/* ── Fechamento ── */
+.closing{background:var(--color-accent);color:#fff}
+.closing-mark{position:absolute;right:-6vw;top:50%;transform:translateY(-50%);width:clamp(360px,46vw,720px);height:auto;opacity:.1;pointer-events:none;user-select:none}
+.closing .wrap{padding:96px 24px;display:flex;flex-direction:column;gap:40px}
+.closing h2{font-size:clamp(40px,6vw,92px);font-weight:800;line-height:.98;letter-spacing:-.04em;word-spacing:.12em;max-width:1000px;text-wrap:balance}
+.closing-actions{display:flex;gap:24px;align-items:center;flex-wrap:wrap;padding-top:28px;border-top:2px solid rgba(255,255,255,.6)}
+.closing .btn{min-width:min(100%,320px)}
+
+/* ── Rodapé ── */
+.site-footer{position:relative;background:var(--color-ink);color:#9a9fab;border-top:2px solid var(--line-dark)}
+.site-footer .inner{max-width:1280px;margin:0 auto;padding:32px 24px 40px;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:20px;font-size:14px;line-height:1.5}
+.foot-brand{display:flex;flex-direction:column;gap:6px}
+.foot-brand strong{display:flex;align-items:center;gap:10px;font-weight:800;font-size:18px;color:#fff}
+
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .track-card,.tool,.mod-tab{transition:none}
+}
+</style>
+</head>
+<body>
+<div class="page">
+<div class="grid-overlay" aria-hidden="true"></div>
+
+<header class="site-header">
+  <nav aria-label="Principal">
+    <a href="#inicio" class="brand"><img src="assets/bussola-simbolo.svg" alt="" width="30" height="30"><span>A Bússola</span></a>
+    <div class="nav-links">
+      <a href="#trilhas">Trilhas</a>
+      <a href="#conteudo">Conteúdo</a>
+      <a href="#oferta">O que está incluído</a>
+      <a href="#quem-conduz">Quem sou eu</a>
+      <a href="#faq">Dúvidas</a>
+    </div>
+    <a href="https://pay.hotmart.com/Y107740330C" class="btn btn-primary nav-cta">Inscrever-se →</a>
+  </nav>
+</header>
+
+<main>
+<section id="inicio" class="hero dark">
+  <div class="wrap">
+    <div class="hero-copy">
+      <div class="eyebrow">Plataforma de educação sobre ansiedade</div>
+      <h1>Conheça ferramentas da psicologia para lidar com a ansiedade</h1>
+      <p class="hero-sub">Descubra como aplicar técnicas da TCC, DBT e ACT para compreender a ansiedade, aprender a regular suas emoções e a responder aos pensamentos difíceis.</p>
+      <div class="hero-actions">
+        <a href="https://pay.hotmart.com/Y107740330C" class="btn btn-primary btn-lg">Quero me inscrever <span aria-hidden="true">→</span></a>
+        <span class="hero-note">Conteúdo educativo. Não substitui psicoterapia.</span>
+      </div>
+    </div>
+    <div class="hero-art" aria-hidden="true">
+      <div class="hero-cols">
+        <div class="hero-col">
+          <div class="hero-card"><img src="assets/trilha-saude-mental.jpg" alt="" width="640" height="907" draggable="false"></div>
+          <div class="hero-card"><img src="assets/trilha-inteligencia-emocional.jpg" alt="" width="640" height="906" draggable="false"></div>
+          <div class="hero-card"><img src="assets/trilha-comportamentos.jpg" alt="" width="640" height="907" draggable="false"></div>
+        </div>
+        <div class="hero-col">
+          <div class="hero-card"><img src="assets/trilha-pensamentos.jpg" alt="" width="640" height="904" draggable="false"></div>
+          <div class="hero-card"><img src="assets/trilha-autoconhecimento.jpg" alt="" width="640" height="906" draggable="false"></div>
+          <div class="hero-card"><img src="assets/trilha-valores.jpg" alt="" width="640" height="906" draggable="false"></div>
+        </div>
+        <div class="hero-col">
+          <div class="hero-card"><img src="assets/trilha-emocoes.jpg" alt="" width="640" height="905" draggable="false"></div>
+          <div class="hero-card"><img src="assets/trilha-habitos.jpg" alt="" width="640" height="905" draggable="false"></div>
+          <div class="hero-card"><img src="assets/trilha-aprendizagem.jpg" alt="" width="640" height="906" draggable="false"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section style="border-top:2px solid var(--color-divider)">
+  <div class="bignum" aria-hidden="true">01</div>
+  <div class="wrap">
+    <div class="ctx-head">
+      <div class="eyebrow">01 — O contexto</div>
+      <h2 class="h2">Os transtornos de ansiedade são os problemas de saúde mental mais comuns no mundo</h2>
+    </div>
+    <div class="stats">
+      <div class="stat">
+        <div class="stat-n">9,3%</div>
+        <p>da população brasileira tem algum transtorno de ansiedade, a maior prevalência registrada entre os países analisados.</p>
+        <div class="stat-src">OMS, 2017</div>
+      </div>
+      <div class="stat">
+        <div class="stat-n">301 mi</div>
+        <p>de pessoas viviam com um transtorno de ansiedade no mundo em 2019.</p>
+        <div class="stat-src">OMS, 2023</div>
+      </div>
+      <div class="stat">
+        <div class="stat-n">+25%</div>
+        <p>foi o aumento na prevalência global de ansiedade e depressão no primeiro ano da pandemia de COVID-19.</p>
+        <div class="stat-src">OMS, 2022</div>
+      </div>
+    </div>
+    <p class="ctx-body">Sentir ansiedade faz parte da vida: é uma resposta do corpo a situações percebidas como ameaçadoras. Ela passa a pedir atenção quando fica intensa, frequente ou começa a limitar o que você faz. Entender como ela funciona ajuda a reconhecer os sinais e a buscar os recursos adequados, incluindo ajuda profissional quando for o caso.</p>
+  </div>
+</section>
+
+<section class="tools dark">
+  <div class="bignum" aria-hidden="true">02</div>
+  <div class="wrap">
+    <div class="mockup"><img src="assets/mockup-aula.jpg" alt="Tela de uma aula da plataforma A Bússola" width="994" height="600" loading="lazy"></div>
+    <div>
+      <div class="eyebrow">02 — A caixa de ferramentas</div>
+      <h2 class="h2">Três abordagens com base científica, reunidas em um só lugar</h2>
+      <div class="tools-text">
+        <p>A Bússola é uma plataforma de educação online sobre a mente humana vista com um olhar prático e para pessoas comuns. As aulas apresentam ferramentas da Terapia Cognitivo-Comportamental (TCC), da Terapia Comportamental Dialética (DBT) e da Terapia de Aceitação e Compromisso (ACT), abordagens com ampla base de pesquisa, explicadas em linguagem clara.</p>
+        <p>O conteúdo tem caráter educativo. Ele não é atendimento psicológico e não substitui psicoterapia, avaliação ou tratamento com um profissional.</p>
+      </div>
+    </div>
+    <div class="tool-grid">
+      <div class="tool">
+        <div class="tool-abbr">TCC</div>
+        <div class="tool-name">Terapia Cognitivo-Comportamental</div>
+        <p>Ferramentas para identificar pensamentos que alimentam a ansiedade e experimentar outras formas de interpretar as situações.</p>
+      </div>
+      <div class="tool">
+        <div class="tool-abbr">DBT</div>
+        <div class="tool-name">Terapia Comportamental Dialética</div>
+        <p>Habilidades de regulação emocional e de tolerância ao mal-estar para os momentos de maior intensidade.</p>
+      </div>
+      <div class="tool">
+        <div class="tool-abbr">ACT</div>
+        <div class="tool-name">Terapia de Aceitação e Compromisso</div>
+        <p>Práticas de aceitação e de atenção ao presente para agir de acordo com o que importa para você, mesmo com a ansiedade presente.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="trilhas" class="trilhas">
+  <div class="bignum" aria-hidden="true">03</div>
+  <div class="wrap">
+    <div class="split-head">
+      <div style="max-width:720px">
+        <div class="eyebrow">03 — Trilhas</div>
+        <h2 class="h2">Por onde você quer começar?</h2>
+        <p class="lead">São 10 trilhas independentes. Cada uma aplica ferramentas da TCC, DBT e ACT a um tema da mente humana.</p>
+      </div>
+      <div class="arrows">
+        <button type="button" class="btn btn-outline btn-round" data-scroll="-1" aria-label="Anterior">←</button>
+        <button type="button" class="btn btn-primary btn-round" data-scroll="1" aria-label="Próximo">→</button>
+      </div>
+    </div>
+  </div>
+  <div class="track" data-track>
+    <ul class="track-row" style="list-style:none;margin:0">
+      <li class="track-card"><img src="assets/trilha-saude-mental.jpg" alt="Saúde mental" width="640" height="907" loading="lazy" draggable="false"></li>
+      <li class="track-card"><img src="assets/trilha-pensamentos.jpg" alt="Pensamentos" width="640" height="904" loading="lazy" draggable="false"></li>
+      <li class="track-card"><img src="assets/trilha-emocoes.jpg" alt="Emoções" width="640" height="905" loading="lazy" draggable="false"></li>
+      <li class="track-card"><img src="assets/trilha-comportamentos.jpg" alt="Comportamentos" width="640" height="907" loading="lazy" draggable="false"></li>
+      <li class="track-card"><img src="assets/trilha-valores.jpg" alt="Valores" width="640" height="906" loading="lazy" draggable="false"></li>
+      <li class="track-card"><img src="assets/trilha-aprendizagem.jpg" alt="Aprendizagem" width="640" height="906" loading="lazy" draggable="false"></li>
+      <li class="track-card"><img src="assets/trilha-inteligencia-emocional.jpg" alt="Inteligência emocional" width="640" height="906" loading="lazy" draggable="false"></li>
+      <li class="track-card"><img src="assets/trilha-autoconhecimento.jpg" alt="Autoconhecimento" width="640" height="906" loading="lazy" draggable="false"></li>
+      <li class="track-card"><img src="assets/trilha-habitos.jpg" alt="Hábitos" width="640" height="905" loading="lazy" draggable="false"></li>
+      <li class="track-card"><img src="assets/trilha-motivacao.jpg" alt="Motivação" width="640" height="904" loading="lazy" draggable="false"></li>
+    </ul>
+  </div>
+  <div class="wrap cta-row">
+    <a href="https://pay.hotmart.com/Y107740330C" class="btn btn-primary btn-lg">Quero me inscrever <span aria-hidden="true">→</span></a>
+  </div>
+</section>
+
+<section class="dark">
+  <div class="bignum" aria-hidden="true">04</div>
+  <div class="wrap">
+    <div class="eyebrow">04 — Para quem é</div>
+    <h2 class="h2" style="max-width:900px">Para quem quer entender a própria mente com base em ciência</h2>
+    <div class="fit-grid">
+      <div class="fit fit-yes">
+        <h3>A plataforma é indicada se você</h3>
+        <ul>
+          <li>Quer entender como pensamentos, emoções e comportamentos se relacionam no seu dia a dia</li>
+          <li>Prefere informação com base científica a promessas rápidas</li>
+          <li>Quer se conhecer melhor e compreender o que sente, como a ansiedade, o medo ou a procrastinação</li>
+          <li>Quer aprender ferramentas práticas da TCC, DBT e ACT</li>
+        </ul>
+      </div>
+      <div class="fit fit-no">
+        <h3>A plataforma não é indicada se você</h3>
+        <ul>
+          <li>Procura atendimento psicológico ou diagnóstico: a plataforma é educativa</li>
+          <li>Está em sofrimento intenso ou em crise: procure um profissional ou ligue para o CVV (188)</li>
+          <li>Busca substituir um tratamento em andamento</li>
+          <li>Espera resultados garantidos em pouco tempo</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="conteudo">
+  <div class="bignum" aria-hidden="true">05</div>
+  <div class="wrap">
+    <div class="split-head">
+      <div style="max-width:760px">
+        <div class="eyebrow">05 — Conteúdo</div>
+        <h2 class="h2">O que você vai estudar</h2>
+        <p class="lead">Aulas gravadas, organizadas em módulos, disponíveis por 12 meses no computador ou no celular.</p>
+      </div>
+      <div class="counts">
+        <div class="pill">4 módulos</div>
+        <div class="pill pill-accent">24 aulas</div>
+      </div>
+    </div>
+
+    <div class="course">
+      <div class="mod-tabs" role="tablist" aria-label="Módulos">
+        <button type="button" class="mod-tab" role="tab" id="tab-0" aria-controls="mod-0" aria-selected="false" tabindex="-1"><span class="mod-n">0</span><span class="mod-label"><span class="mod-title">Comece aqui</span><span class="mod-count">2 aulas</span></span></button>
+        <button type="button" class="mod-tab" role="tab" id="tab-1" aria-controls="mod-1" aria-selected="true"><span class="mod-n">1</span><span class="mod-label"><span class="mod-title">Como a nossa mente funciona</span><span class="mod-count">8 aulas</span></span></button>
+        <button type="button" class="mod-tab" role="tab" id="tab-2" aria-controls="mod-2" aria-selected="false" tabindex="-1"><span class="mod-n">2</span><span class="mod-label"><span class="mod-title">Ferramentas Práticas da TCC para o dia-a-dia</span><span class="mod-count">9 aulas</span></span></button>
+        <button type="button" class="mod-tab" role="tab" id="tab-3" aria-controls="mod-3" aria-selected="false" tabindex="-1"><span class="mod-n">3</span><span class="mod-label"><span class="mod-title">Trilhas Autônomas</span><span class="mod-count">5 aulas</span></span></button>
+      </div>
+
+      <div class="mod-panel" role="tabpanel" id="mod-0" aria-labelledby="tab-0" hidden>
+        <div class="mod-head"><div><span class="mod-kicker">Módulo 0</span><h3>Comece aqui</h3></div><span class="pill">2 aulas</span></div>
+        <ol class="lessons">
+          <li><span class="lesson-n">1</span><span class="lesson-t">O que é A Bússola?</span><span class="lesson-play" aria-hidden="true">▶</span></li>
+          <li><span class="lesson-n">2</span><span class="lesson-t">Estrutura de aprendizado</span><span class="lesson-play" aria-hidden="true">▶</span></li>
+        </ol>
+      </div>
+      <div class="mod-panel" role="tabpanel" id="mod-1" aria-labelledby="tab-1">
+        <div class="mod-head"><div><span class="mod-kicker">Módulo 1</span><h3>Como a nossa mente funciona</h3></div><span class="pill">8 aulas</span></div>
+        <ol class="lessons">
+          <li><span class="lesson-n">1.1</span><span class="lesson-t">Pensamentos, emoções e comportamentos</span><span class="lesson-play" aria-hidden="true">▶</span></li>
+          <li><span class="lesson-n">1.2</span><span class="lesson-t">Como nossa mente funciona dentro do modelo cognitivo</span><span class="lesson-play" aria-hidden="true">▶</span></li>
+          <li><span class="lesson-n">2</span><span class="lesson-t">Distorções cognitivas</span><span class="lesson-play" aria-hidden="true">▶</span></li>
+          <li><span class="lesson-n">3</span><span class="lesson-t">RPD (curto)</span><span class="lesson-play" aria-hidden="true">▶</span></li>
+          <li><span class="lesson-n">4</span><span class="lesson-t">Técnicas de desfusão cognitiva e mindfulness (+roleplay)</span><span class="lesson-play" aria-hidden="true">▶</span></li>
+          <li><span class="lesson-n">5</span><span class="lesson-t">Valores</span><span class="lesson-play" aria-hidden="true">▶</span></li>
+          <li><span class="lesson-n">6</span><span class="lesson-t">Pragmatismo e desesperança criativa</span><span class="lesson-play" aria-hidden="true">▶</span></li>
+          <li><span class="lesson-n">7</span><span class="lesson-t">RPD (completo)</span><span class="lesson-play" aria-hidden="true">▶</span></li>
+        </ol>
+      </div>
+      <div class="mod-panel" role="tabpanel" id="mod-2" aria-labelledby="tab-2" hidden>
+        <div class="mod-head"><div><span class="mod-kicker">Módulo 2</span><h3>Ferramentas Práticas da TCC para o dia-a-dia</h3></div><span class="pill">9 aulas</span></div>
+        <ol class="lessons">
+          <li><span class="lesson-n">1</span><span class="lesson-t">Introdução</span><span class="lesson-play" aria-hidden="true">▶</span></li>
+          <li><span class="lesson-n">2</span><span class="lesson-t">Técnicas de respiração</span><span class="lesson-play" aria-hidden="true">▶</span></li>
+          <li><span class="lesson-n">3</span><span class="lesson-t">Preocupações úteis vs inúteis + Horário da preocupação</span><span class="lesson-play" aria-hidden="true">▶</span></li>
+          <li><span class="lesson-n">4</span><span class="lesson-t">Resolução de problemas</span><span class="lesson-play" aria-hidden="true">▶</span></li>
+          <li><span class="lesson-n">5</span><span class="lesson-t">Protocolo para regulação do sono</span><span class="lesson-play" aria-hidden="true">▶</span></li>
+          <li><span class="lesson-n">6</span><span class="lesson-t">Emoções</span><span class="lesson-play" aria-hidden="true">▶</span></li>
+          <li><span class="lesson-n">7</span><span class="lesson-t">Regulação emocional (curto prazo)</span><span class="lesson-play" aria-hidden="true">▶</span></li>
+          <li><span class="lesson-n">8</span><span class="lesson-t">Regulação emocional (longo prazo)</span><span class="lesson-play" aria-hidden="true">▶</span></li>
+          <li><span class="lesson-n">9</span><span class="lesson-t">Roda da vida</span><span class="lesson-play" aria-hidden="true">▶</span></li>
+        </ol>
+      </div>
+      <div class="mod-panel" role="tabpanel" id="mod-3" aria-labelledby="tab-3" hidden>
+        <div class="mod-head"><div><span class="mod-kicker">Módulo 3</span><h3>Trilhas Autônomas</h3></div><span class="pill">5 aulas</span></div>
+        <ol class="lessons">
+          <li><span class="lesson-n">1</span><span class="lesson-t">Medo</span><span class="lesson-play" aria-hidden="true">▶</span></li>
+          <li><span class="lesson-n">2</span><span class="lesson-t">Ansiedade</span><span class="lesson-play" aria-hidden="true">▶</span></li>
+          <li><span class="lesson-n">3</span><span class="lesson-t">Procrastinação</span><span class="lesson-play" aria-hidden="true">▶</span></li>
+          <li><span class="lesson-n">4</span><span class="lesson-t">Tristeza e culpa</span><span class="lesson-play" aria-hidden="true">▶</span></li>
+          <li><span class="lesson-n">5</span><span class="lesson-t">Gestão de Hábitos</span><span class="lesson-play" aria-hidden="true">▶</span></li>
+        </ol>
+      </div>
+    </div>
+
+    <div class="feedback">
+      <h3>O que dizem sobre as aulas</h3>
+      <p class="lead">Comentários de alunos da Bússola sobre o conteúdo e o formato da plataforma.</p>
+      <div class="quotes">
+        <figure class="quote">
+          <blockquote>“Os role plays são um grande ponto de evolução, porque é possível praticar e, ao mesmo tempo, ter um feedback de melhorias ou ângulos diferentes que podem ser explorados na prática.”</blockquote>
+          <figcaption>Aluno da Bússola</figcaption>
+        </figure>
+        <figure class="quote">
+          <blockquote>“Me faz refletir um pouco mais sobre tudo que estou vivendo.”</blockquote>
+          <figcaption>Aluno da Bússola</figcaption>
+        </figure>
+        <figure class="quote">
+          <blockquote>“Lucas foi o primeiro psicólogo que realmente vi que sabe o que faz e que me ajudou a resolver o que eu precisava resolver. Recomendei para vários amigos e tenho muita confiança nele.”</blockquote>
+          <figcaption>Aluno da Bússola</figcaption>
+        </figure>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="oferta" class="offer dark">
+  <div class="bignum" aria-hidden="true">06</div>
+  <div class="wrap">
+    <div class="offer-list-col">
+      <div class="eyebrow">06 — O que está incluído</div>
+      <h2 class="h2">O que você recebe ao se inscrever</h2>
+      <ul class="includes">
+        <li><span>01</span>24 aulas gravadas com ferramentas da TCC, DBT e ACT</li>
+        <li><span>02</span>4 módulos: Comece aqui, Como a nossa mente funciona, Ferramentas Práticas da TCC para o dia-a-dia e Trilhas Autônomas</li>
+        <li><span>03</span>Trilhas autônomas sobre Medo, Ansiedade, Procrastinação, Tristeza e culpa e Gestão de Hábitos</li>
+        <li><span>04</span>Acesso por 12 meses, no computador ou no celular</li>
+        <li><span>05</span>7 dias para desistir, com reembolso integral</li>
+      </ul>
+    </div>
+    <div class="price">
+      <div>
+        <div class="price-kicker">Investimento</div>
+        <div class="price-inst">12x de</div>
+        <div class="price-big">R$ 51,40 *</div>
+        <div class="price-cash">Ou R$ 497,00 à vista</div>
+        <div class="price-terms">12 meses de acesso · 7 dias para desistir · Pagamento processado pela Hotmart</div>
+      </div>
+      <a href="https://pay.hotmart.com/Y107740330C" class="btn btn-light">Quero me inscrever <span aria-hidden="true">→</span></a>
+    </div>
+  </div>
+</section>
+
+<section id="quem-conduz" class="about">
+  <div class="bignum" aria-hidden="true">07</div>
+  <div class="wrap">
+    <div class="about-media">
+      <div class="portrait"><img src="assets/lucas.jpg" alt="Foto de Lucas" width="412" height="556" loading="lazy"></div>
+      <div class="chips">
+        <span class="pill">Psicólogo Clínico</span>
+        <span class="pill">TCC · ACT · DBT</span>
+        <span class="pill">Mentor</span>
+        <span class="pill">Pai</span>
+        <span class="pill">Marido</span>
+        <span class="pill">Esportista</span>
+        <span class="pill">Cristão</span>
+      </div>
+    </div>
+    <div class="about-copy">
+      <div class="eyebrow">07 — Quem sou eu</div>
+      <h2>Quem sou <span>eu</span>?</h2>
+      <div class="about-crp">Lucas Rocha · Psicólogo · CRP 04/64296</div>
+      <div class="about-text">
+        <p>E aí, tudo certo? Sou Lucas, psicólogo clínico, já atuei como supervisor clínico e sou especialista em práticas baseadas em evidências e terapia cognitivo comportamental, com formação em ACT e DBT.</p>
+        <p>Além disso, tô sempre envolvido em divulgar e defender a saúde mental através do meu Instagram, compartilhando práticas baseadas em evidências dentro da psicologia para ajudar as pessoas a criarem a vida que querem viver. Meu maior valor de vida é a eficiência.</p>
+        <p>Quando não estou estudando ou trabalhando, amo brincar com meu gatinho, Noé, passar tempo com minha esposa e cuidar da minha filha, Liz. Também sou fã de musculação, esportes e jiu jitsu, atualmente faixa roxa 1 grau, rsrs.</p>
+        <p>Sou fã de animes, séries e filmes que envolvem fantasia: Senhor dos Anéis, O Hobbit, Demon Slayer, Blade Runner e Vinland Saga com certeza estão entre as obras que mais me encantaram até hoje (se você gosta ou já viu alguma delas, já considero que somos amigos íntimos, hahaha).</p>
+        <p>Sou bem caseiro, e pra mim uma noite perfeita é fazer um hambúrguer com minha esposa e filha, assistir uma boa série debaixo das cobertas com uma chuvinha de fundo.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="guarantee dark">
+  <div class="wrap">
+    <div class="g-mark">
+      <div class="g-num">7</div>
+      <div class="g-label">dias para<br>desistir</div>
+    </div>
+    <div class="g-text">
+      <p>Conheça o conteúdo antes de decidir.</p>
+      <p>O acesso a todas as trilhas é liberado assim que o pagamento é confirmado. Se, em até 7 dias após a compra, você decidir que a plataforma não é para você, solicite o cancelamento pela Hotmart e receba de volta 100% do valor pago.</p>
+    </div>
+  </div>
+</section>
+
+<section id="faq" class="faq">
+  <div class="wrap">
+    <div class="faq-head">
+      <div class="eyebrow">08 — Dúvidas</div>
+      <h2 class="h2">Perguntas frequentes</h2>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item">
+        <button type="button" class="faq-q" aria-expanded="true" aria-controls="faq-0"><span class="faq-n">01</span><span class="faq-t">A plataforma é um tratamento para ansiedade?</span><span class="faq-sign" aria-hidden="true"></span></button>
+        <p class="faq-a" id="faq-0">Não. A Bússola é uma plataforma de educação, com caráter informativo. Ela não é atendimento psicológico e não substitui psicoterapia, diagnóstico ou tratamento.</p>
+      </div>
+      <div class="faq-item">
+        <button type="button" class="faq-q" aria-expanded="false" aria-controls="faq-1"><span class="faq-n">02</span><span class="faq-t">O que são TCC, DBT e ACT?</span><span class="faq-sign" aria-hidden="true"></span></button>
+        <p class="faq-a" id="faq-1" hidden>São três abordagens da psicologia com ampla base de pesquisa. A TCC trabalha a relação entre pensamentos, emoções e comportamentos; a DBT desenvolve habilidades de regulação emocional; a ACT trabalha aceitação e ação orientada por valores. Na Bússola, você aprende ferramentas dessas abordagens em formato educativo.</p>
+      </div>
+      <div class="faq-item">
+        <button type="button" class="faq-q" aria-expanded="false" aria-controls="faq-2"><span class="faq-n">03</span><span class="faq-t">Posso usar a plataforma se já faço terapia?</span><span class="faq-sign" aria-hidden="true"></span></button>
+        <p class="faq-a" id="faq-2" hidden>Sim. O conteúdo pode complementar o acompanhamento. Em caso de dúvida, converse com o profissional que acompanha você.</p>
+      </div>
+      <div class="faq-item">
+        <button type="button" class="faq-q" aria-expanded="false" aria-controls="faq-3"><span class="faq-n">04</span><span class="faq-t">Vou receber atendimento individual?</span><span class="faq-sign" aria-hidden="true"></span></button>
+        <p class="faq-a" id="faq-3" hidden>Não. As aulas são gravadas e a plataforma não inclui atendimento psicológico.</p>
+      </div>
+      <div class="faq-item">
+        <button type="button" class="faq-q" aria-expanded="false" aria-controls="faq-4"><span class="faq-n">05</span><span class="faq-t">Quais são as formas de pagamento?</span><span class="faq-sign" aria-hidden="true"></span></button>
+        <p class="faq-a" id="faq-4" hidden>O pagamento é feito pela Hotmart. [Cartão de crédito em até 12x, PIX ou boleto.]</p>
+      </div>
+      <div class="faq-item">
+        <button type="button" class="faq-q" aria-expanded="false" aria-controls="faq-5"><span class="faq-n">06</span><span class="faq-t">Por quanto tempo terei acesso?</span><span class="faq-sign" aria-hidden="true"></span></button>
+        <p class="faq-a" id="faq-5" hidden>Por 12 meses a partir da confirmação do pagamento.</p>
+      </div>
+      <div class="faq-item">
+        <button type="button" class="faq-q" aria-expanded="false" aria-controls="faq-6"><span class="faq-n">07</span><span class="faq-t">E se eu desistir?</span><span class="faq-sign" aria-hidden="true"></span></button>
+        <p class="faq-a" id="faq-6" hidden>Você pode solicitar o reembolso integral em até 7 dias após a compra.</p>
+      </div>
+      <div class="faq-item">
+        <button type="button" class="faq-q" aria-expanded="false" aria-controls="faq-7"><span class="faq-n">08</span><span class="faq-t">O que fazer se eu estiver em crise?</span><span class="faq-sign" aria-hidden="true"></span></button>
+        <p class="faq-a" id="faq-7" hidden>Procure ajuda imediatamente: ligue para o CVV no 188 (gratuito, 24 horas), para o SAMU no 192 ou vá a uma unidade de saúde. A plataforma não é indicada para situações de crise.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="closing">
+  <img class="closing-mark" src="assets/bussola-simbolo-branco.svg" alt="" aria-hidden="true">
+  <div class="wrap">
+    <h2>Compreender a sua mente e ter ferramentas pra se conhecer</h2>
+    <div class="closing-actions">
+      <a href="https://pay.hotmart.com/Y107740330C" class="btn btn-light">Quero me inscrever <span aria-hidden="true">→</span></a>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="site-footer">
+  <div class="inner">
+    <div class="foot-brand"><strong><img src="assets/bussola-simbolo.svg" alt="" width="26" height="26">A Bússola</strong><span>Lucas Rocha · Psicólogo · CRP 04/64296</span></div>
+    <span>Conteúdo de caráter educativo. Não substitui psicoterapia, diagnóstico ou tratamento.</span>
+    <span>Em situação de crise, ligue para o CVV no 188 (gratuito, 24 horas) ou para o SAMU no 192.</span>
+    <span>* Parcelamento com juros, conforme condições da Hotmart.</span>
+  </div>
+</footer>
+</div>
+
+<script>
+// Carrossel de trilhas: setas + arrastar com o mouse
+(function () {
+  var track = document.querySelector('[data-track]');
+  if (!track) return;
+  document.querySelectorAll('[data-scroll]').forEach(function (b) {
+    b.addEventListener('click', function () {
+      track.scrollBy({ left: Number(b.dataset.scroll) * 316, behavior: 'smooth' });
+    });
+  });
+  var down = false, x0 = 0, s0 = 0;
+  track.addEventListener('pointerdown', function (e) {
+    if (e.pointerType !== 'mouse') return;
+    down = true; x0 = e.clientX; s0 = track.scrollLeft;
+    track.classList.add('is-dragging');
+  });
+  window.addEventListener('pointermove', function (e) {
+    if (down) track.scrollLeft = s0 - (e.clientX - x0);
+  });
+  window.addEventListener('pointerup', function () {
+    if (!down) return;
+    down = false;
+    track.classList.remove('is-dragging');
+  });
+})();
+
+// Abas dos módulos
+(function () {
+  var tabs = Array.prototype.slice.call(document.querySelectorAll('.mod-tab'));
+  function select(i, focus) {
+    tabs.forEach(function (t, j) {
+      var on = i === j;
+      t.setAttribute('aria-selected', on);
+      t.tabIndex = on ? 0 : -1;
+      document.getElementById(t.getAttribute('aria-controls')).hidden = !on;
+    });
+    if (focus) tabs[i].focus();
+  }
+  tabs.forEach(function (t, i) {
+    t.addEventListener('click', function () { select(i); });
+    t.addEventListener('keydown', function (e) {
+      var k = { ArrowDown: 1, ArrowRight: 1, ArrowUp: -1, ArrowLeft: -1 }[e.key];
+      if (!k) return;
+      e.preventDefault();
+      select((i + k + tabs.length) % tabs.length, true);
+    });
+  });
+})();
+
+// FAQ: uma pergunta aberta por vez
+(function () {
+  var qs = Array.prototype.slice.call(document.querySelectorAll('.faq-q'));
+  qs.forEach(function (q) {
+    q.addEventListener('click', function () {
+      var open = q.getAttribute('aria-expanded') !== 'true';
+      qs.forEach(function (o) {
+        var on = o === q && open;
+        o.setAttribute('aria-expanded', on);
+        document.getElementById(o.getAttribute('aria-controls')).hidden = !on;
+      });
+    });
+  });
+})();
+</script>
+</body>
+</html>
